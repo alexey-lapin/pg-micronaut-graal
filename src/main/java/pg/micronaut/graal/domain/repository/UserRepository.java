@@ -1,4 +1,6 @@
-package pg.micronaut.graal;
+package pg.micronaut.graal.domain.repository;
+
+import pg.micronaut.graal.domain.model.User;
 
 import java.util.Optional;
 

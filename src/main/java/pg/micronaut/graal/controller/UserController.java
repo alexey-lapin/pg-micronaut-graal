@@ -1,8 +1,10 @@
-package pg.micronaut.graal;
+package pg.micronaut.graal.controller;
 
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 import lombok.RequiredArgsConstructor;
+import pg.micronaut.graal.domain.repository.UserRepository;
+import pg.micronaut.graal.domain.model.User;
 
 import java.util.Map;
 import java.util.UUID;

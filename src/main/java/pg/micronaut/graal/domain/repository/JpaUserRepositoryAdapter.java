@@ -1,6 +1,7 @@
-package pg.micronaut.graal;
+package pg.micronaut.graal.domain.repository;
 
 import lombok.RequiredArgsConstructor;
+import pg.micronaut.graal.domain.model.User;
 
 import javax.inject.Singleton;
 import java.util.Optional;

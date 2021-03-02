@@ -1,4 +1,4 @@
-package pg.micronaut.graal;
+package pg.micronaut.graal.domain.model;
 
 
 import lombok.AccessLevel;

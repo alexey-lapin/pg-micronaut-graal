@@ -1,3 +1,5 @@
+import io.micronaut.gradle.graalvm.NativeImageTask
+
 plugins {
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("io.micronaut.application") version "1.3.4"
@@ -46,10 +48,8 @@ java {
 }
 
 tasks {
-//    withType<Exec> {
-//        doFirst{println("b " + commandLine)}
-//        doLast{println("a " + commandLine)}
-//    }
-
+    withType<NativeImageTask> {
+        verbose(true)
+    }
 }
 
