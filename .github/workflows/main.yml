@@ -43,7 +43,7 @@ jobs:
         with:
           name: app
           path: |
-            service/build/native-image/application
+            build/native-image/application
 
       - name: Run app for testing
         run: |
