@@ -47,7 +47,7 @@ jobs:
 
       - name: Run app for testing
         run: |
-          nohup ./service/build/native-image/application &
+          nohup ./build/native-image/application &
           sleep 5s
 
       - name: Run postman collection

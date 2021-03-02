@@ -17,15 +17,11 @@ import java.util.UUID;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class User {
+public class Article {
 
     @EqualsAndHashCode.Include
     @Id
     private UUID id;
-    private String username;
-    private String email;
-    private String password;
-    private String bio;
-    private String image;
+    private String title;
 
 }
