@@ -23,8 +23,6 @@ jobs:
           java-version: "java8"
           native-image: "true"
 
-      - uses: actions/setup-node@v1
-
       - name: Cache Gradle wrapper and dependencies
         uses: actions/cache@v2
         with:
@@ -49,13 +47,3 @@ jobs:
         run: |
           nohup ./build/native-image/application &
           sleep 5s
-
-      - name: Run postman collection
-        run: >
-          npx newman run
-          https://raw.githubusercontent.com/gothinkster/realworld/master/api/Conduit.postman_collection.json
-          --delay-request 200
-          --global-var "APIURL=http://localhost:8080/api"
-          --global-var "USERNAME=username"
-          --global-var "EMAIL=username@example.com"
-          --global-var "PASSWORD=password"
