@@ -7,6 +7,7 @@ import pg.micronaut.graal.domain.model.User;
 
 import javax.inject.Singleton;
 import java.util.Optional;
+import java.util.UUID;
 
 @TypeHint(
         value = {JpaUserRepositoryAdapter.class},
@@ -35,7 +36,9 @@ public class JpaUserRepositoryAdapter implements UserRepository {
 
     @Override
     public User save(User user) {
-        if (repository.existsById(user.getId())) {
+        UUID id = user.getId();
+        boolean b = repository.existsById(id);
+        if (b) {
             return repository.update(user);
         }
         return repository.save(user);

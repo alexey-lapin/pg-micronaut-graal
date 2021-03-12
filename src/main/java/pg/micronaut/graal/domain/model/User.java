@@ -1,5 +1,6 @@
 package pg.micronaut.graal.domain.model;
 
+import io.micronaut.core.annotation.Introspected;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
+@Introspected
 public class User {
 
     @EqualsAndHashCode.Include
