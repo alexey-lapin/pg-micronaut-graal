@@ -1,5 +1,6 @@
 package pg.micronaut.graal.domain.repository;
 
+import io.micronaut.core.annotation.Introspected;
 import io.micronaut.core.annotation.TypeHint;
 import lombok.RequiredArgsConstructor;
 import pg.micronaut.graal.domain.model.User;
@@ -15,6 +16,7 @@ import java.util.Optional;
                 TypeHint.AccessType.ALL_PUBLIC_METHODS
         }
 )
+@Introspected
 @RequiredArgsConstructor
 @Singleton
 public class JpaUserRepositoryAdapter implements UserRepository {
