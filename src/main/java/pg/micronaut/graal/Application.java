@@ -8,6 +8,7 @@ import io.micronaut.runtime.Micronaut;
 import io.micronaut.runtime.event.annotation.EventListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 import pg.micronaut.graal.domain.model.Article;
 import pg.micronaut.graal.domain.model.User;
 import pg.micronaut.graal.domain.repository.DataArticleRepository;
@@ -27,6 +28,8 @@ public class Application {
     private final DataArticleRepository articleRepository;
 
     public static void main(String[] args) {
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
         Micronaut.run(Application.class, args);
     }
 
@@ -49,7 +52,7 @@ public class Application {
                     .email("u1@email.com")
                     .build());
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("failed to populate users", ex);
         }
         log.info(">> populate users end");
     }
@@ -67,7 +70,7 @@ public class Application {
                 articleRepository.save(article);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("failed to populate articles", ex);
         }
         log.info(">> populate articles end");
     }

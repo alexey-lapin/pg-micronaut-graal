@@ -31,7 +31,7 @@ dependencies {
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.liquibase:micronaut-liquibase")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-    implementation("org.slf4j:jcl-over-slf4j:1.7.30")
+    implementation("org.slf4j:jul-to-slf4j:1.7.30")
 
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.h2database:h2")
