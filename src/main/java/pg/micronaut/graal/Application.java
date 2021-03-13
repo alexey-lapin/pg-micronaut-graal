@@ -4,6 +4,8 @@ import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.env.Environment;
 import io.micronaut.context.event.StartupEvent;
 import io.micronaut.core.convert.ConversionContext;
+import io.micronaut.core.convert.DefaultConversionService;
+import io.micronaut.core.reflect.ClassUtils;
 import io.micronaut.core.type.Argument;
 import io.micronaut.inject.BeanDefinition;
 import io.micronaut.inject.ExecutableMethod;
@@ -49,8 +51,17 @@ public class Application {
     }
 
     private void checkEnv() {
-        Optional<Class> converted = env.convert("java.util.UUID", ConversionContext.of(Argument.of(Class.class)));
+        String type = "java.util.UUID";
+        Optional<Class> converted = env.convert(type, ConversionContext.of(Argument.of(Class.class)));
         log.info(">> converted: " + converted);
+
+        ClassLoader classLoader = Class.class.getClassLoader();
+        if (classLoader == null) {
+            classLoader = DefaultConversionService.class.getClassLoader();
+        }
+        log.info(">> cl: " + classLoader);
+        Optional<Class> classOptional = ClassUtils.forName(type, classLoader);
+        log.info(">> clo: " + classOptional);
     }
 
     private void populateUsers() {
