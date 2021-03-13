@@ -42,9 +42,9 @@ public class Application {
 
     @EventListener
     void init(StartupEvent event) {
-        dumpMetadata(DataUserRepository.class);
-        dumpMetadata(DataArticleRepository.class);
-        dumpMetadata(UserRepository.class);
+//        dumpMetadata(DataUserRepository.class);
+//        dumpMetadata(DataArticleRepository.class);
+//        dumpMetadata(UserRepository.class);
         checkEnv();
         populateUsers();
         populateArticles();
@@ -60,8 +60,10 @@ public class Application {
             classLoader = DefaultConversionService.class.getClassLoader();
         }
         log.info(">> cl: " + classLoader);
-        Optional<Class> classOptional = ClassUtils.forName(type, classLoader);
-        log.info(">> clo: " + classOptional);
+        Optional<Class> uuidOptional = ClassUtils.forName(type, classLoader);
+        log.info(">> uuid: " + uuidOptional);
+        Optional<Class> stringOptional = ClassUtils.forName(String.class.getName(), classLoader);
+        log.info(">> string: " + stringOptional);
     }
 
     private void populateUsers() {
