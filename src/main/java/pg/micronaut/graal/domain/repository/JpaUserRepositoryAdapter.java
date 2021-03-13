@@ -3,8 +3,6 @@ package pg.micronaut.graal.domain.repository;
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.core.annotation.TypeHint;
-import io.micronaut.core.beans.BeanWrapper;
-import io.micronaut.core.reflect.ReflectionUtils;
 import io.micronaut.inject.BeanDefinition;
 import io.micronaut.inject.ExecutableMethod;
 import lombok.RequiredArgsConstructor;
@@ -45,10 +43,6 @@ public class JpaUserRepositoryAdapter implements UserRepository {
     @Override
     public User save(User user) {
         UUID id = user.getId();
-        log.info(">> user.id: " + id.getClass().getName());
-        BeanDefinition<? extends DataUserRepository> beanDefinition = context.getBeanDefinition(repository.getClass());
-        Optional<? extends ExecutableMethod<? extends DataUserRepository, Object>> existsById = beanDefinition.findMethod("existsById", UUID.class);
-        log.info(">> existsById method: " + existsById.get());
         boolean b = repository.existsById(id);
         if (b) {
             return repository.update(user);

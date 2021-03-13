@@ -22,6 +22,7 @@ public class ExistsByInterceptorWrapper<T> extends DefaultExistsByInterceptor<T>
 
     @Override
     public Boolean intercept(RepositoryMethodKey methodKey, MethodInvocationContext<T, Boolean> context) {
+        log.info(">> context: " + context.getExecutableMethod().getClass().getName() + " : " + context.toString());
         Optional<Class> aClass = context.classValue(DataMethod.class, DataMethod.META_MEMBER_ID_TYPE);
         log.info(">> aClass: " + aClass.map(Class::getName).orElse(null));
         Class idType = aClass.orElseGet(() -> getRequiredRootEntity(context));
