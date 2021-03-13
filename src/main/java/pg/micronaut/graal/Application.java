@@ -1,7 +1,10 @@
 package pg.micronaut.graal;
 
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.context.env.Environment;
 import io.micronaut.context.event.StartupEvent;
+import io.micronaut.core.convert.ConversionContext;
+import io.micronaut.core.type.Argument;
 import io.micronaut.inject.BeanDefinition;
 import io.micronaut.inject.ExecutableMethod;
 import io.micronaut.runtime.Micronaut;
@@ -16,6 +19,7 @@ import pg.micronaut.graal.domain.repository.DataUserRepository;
 import pg.micronaut.graal.domain.repository.UserRepository;
 
 import javax.inject.Singleton;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -24,6 +28,7 @@ import java.util.UUID;
 public class Application {
 
     private final ApplicationContext context;
+    private final Environment env;
     private final UserRepository userRepository;
     private final DataArticleRepository articleRepository;
 
@@ -38,8 +43,14 @@ public class Application {
         dumpMetadata(DataUserRepository.class);
         dumpMetadata(DataArticleRepository.class);
         dumpMetadata(UserRepository.class);
+        checkEnv();
         populateUsers();
         populateArticles();
+    }
+
+    private void checkEnv() {
+        Optional<Class> converted = env.convert("java.util.UUID", ConversionContext.of(Argument.of(Class.class)));
+        log.info(">> converted: " + converted);
     }
 
     private void populateUsers() {
