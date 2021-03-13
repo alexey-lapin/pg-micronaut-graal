@@ -15,12 +15,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import pg.micronaut.graal.domain.model.Article;
+import pg.micronaut.graal.domain.model.Dummy1;
+import pg.micronaut.graal.domain.model.Dummy2;
 import pg.micronaut.graal.domain.model.User;
 import pg.micronaut.graal.domain.repository.DataArticleRepository;
+import pg.micronaut.graal.domain.repository.DataDummy1Repository;
+import pg.micronaut.graal.domain.repository.DataDummy2Repository;
 import pg.micronaut.graal.domain.repository.DataUserRepository;
 import pg.micronaut.graal.domain.repository.UserRepository;
 
 import javax.inject.Singleton;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,8 +36,11 @@ public class Application {
 
     private final ApplicationContext context;
     private final Environment env;
+
     private final UserRepository userRepository;
     private final DataArticleRepository articleRepository;
+    private final DataDummy1Repository dummy1Repository;
+    private final DataDummy2Repository dummy2Repository;
 
     public static void main(String[] args) {
         SLF4JBridgeHandler.removeHandlersForRootLogger();
@@ -48,6 +56,8 @@ public class Application {
         checkEnv();
         populateUsers();
         populateArticles();
+        populateDummys1();
+        populateDummys2();
     }
 
     private void checkEnv() {
@@ -60,12 +70,14 @@ public class Application {
         String uuidType = "java.util.UUID";
         Optional<Class> uuidOptional = ClassUtils.forName(uuidType, classLoader);
         log.info(">> uuid: " + uuidOptional);
+
         String stringType = "java.lang.String";
         Optional<Class> stringOptional = ClassUtils.forName(stringType, classLoader);
         log.info(">> string: " + stringOptional);
 
         Optional<Class> uuidConverted = env.convert(uuidType, ConversionContext.of(Argument.of(Class.class)));
         log.info(">> uuidConverted: " + uuidConverted);
+
         Optional<Class> stringConverted = env.convert(stringType, ConversionContext.of(Argument.of(Class.class)));
         log.info(">> stringConverted: " + stringConverted);
     }
@@ -101,6 +113,42 @@ public class Application {
             log.error("failed to populate articles", ex);
         }
         log.info(">> populate articles end");
+    }
+
+    private void populateDummys1() {
+        log.info(">> populate dummys1 start");
+        try {
+            Dummy1 dummy1 = Dummy1.builder()
+                    .id(LocalDate.now())
+                    .title("t1")
+                    .build();
+            if (dummy1Repository.existsById(dummy1.getId())) {
+                dummy1Repository.update(dummy1);
+            } else {
+                dummy1Repository.save(dummy1);
+            }
+        } catch (Exception ex) {
+            log.error("failed to populate dummys1", ex);
+        }
+        log.info(">> populate dummys1 end");
+    }
+
+    private void populateDummys2() {
+        log.info(">> populate dummys2 start");
+        try {
+            Dummy2 dummy2 = Dummy2.builder()
+                    .id(UUID.randomUUID().toString())
+                    .title("t1")
+                    .build();
+            if (dummy2Repository.existsById(dummy2.getId())) {
+                dummy2Repository.update(dummy2);
+            } else {
+                dummy2Repository.save(dummy2);
+            }
+        } catch (Exception ex) {
+            log.error("failed to populate dummys2", ex);
+        }
+        log.info(">> populate dummys2 end");
     }
 
     private void dumpMetadata(Class<?> bean) {

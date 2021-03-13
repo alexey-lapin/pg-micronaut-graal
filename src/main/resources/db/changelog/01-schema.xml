@@ -129,4 +129,22 @@
                         startValue="0"/>
     </changeSet>
 
+    <changeSet id="09" author="al">
+        <createTable tableName="dummy1">
+            <column name="id" type="timestamp with time zone">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(200)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="10" author="al">
+        <createTable tableName="dummy2">
+            <column name="id" type="varchar(200)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(200)"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
