@@ -12,5 +12,5 @@
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
-<!--    <logger name="io.micronaut.context.condition" level="TRACE"/>-->
+    <logger name="io.micronaut.core.reflect.ClassUtils" level="TRACE"/>
 </configuration>
