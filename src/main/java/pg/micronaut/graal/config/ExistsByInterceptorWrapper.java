@@ -67,7 +67,7 @@ public class ExistsByInterceptorWrapper<T> extends DefaultExistsByInterceptor<T>
         log.info(">> context idType: " + idType.map(Class::getName).orElse(null));
 
         Class rootEntityType = idType.orElseGet(() -> getRequiredRootEntity(context));
-        log.info(">> context rootEntity: " + rootEntityType.getName());
+        log.info(">> context rootEntityType: " + rootEntityType.getName());
 
         return super.intercept(methodKey, context);
     }

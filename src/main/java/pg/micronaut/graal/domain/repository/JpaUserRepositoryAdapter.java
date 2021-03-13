@@ -14,10 +14,10 @@ import java.util.UUID;
 @TypeHint(
 //        value = {JpaUserRepositoryAdapter.class},
         typeNames = {
-                "java.util.UUID",
-                "pg.micronaut.graal.domain.repository.$DataUserRepository$InterceptedDefinition",
-                "pg.micronaut.graal.domain.repository.$DataUserRepository$InterceptedDefinition$$exec7",
-                "pg.micronaut.graal.domain.repository.$DataUserRepository$InterceptedDefinitionClass",
+//                "java.util.UUID",
+//                "pg.micronaut.graal.domain.repository.$DataUserRepository$InterceptedDefinition",
+//                "pg.micronaut.graal.domain.repository.$DataUserRepository$InterceptedDefinition$$exec7",
+//                "pg.micronaut.graal.domain.repository.$DataUserRepository$InterceptedDefinitionClass",
         },
         accessType = {
                 TypeHint.AccessType.ALL_DECLARED_CONSTRUCTORS,
