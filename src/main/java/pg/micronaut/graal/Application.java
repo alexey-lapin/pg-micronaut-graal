@@ -51,19 +51,23 @@ public class Application {
     }
 
     private void checkEnv() {
-        String type = "java.util.UUID";
-        Optional<Class> converted = env.convert(type, ConversionContext.of(Argument.of(Class.class)));
-        log.info(">> converted: " + converted);
-
         ClassLoader classLoader = Class.class.getClassLoader();
         if (classLoader == null) {
             classLoader = DefaultConversionService.class.getClassLoader();
         }
         log.info(">> cl: " + classLoader);
-        Optional<Class> uuidOptional = ClassUtils.forName(type, classLoader);
+
+        String uuidType = "java.util.UUID";
+        Optional<Class> uuidOptional = ClassUtils.forName(uuidType, classLoader);
         log.info(">> uuid: " + uuidOptional);
-        Optional<Class> stringOptional = ClassUtils.forName(String.class.getName(), classLoader);
+        String stringType = "java.lang.String";
+        Optional<Class> stringOptional = ClassUtils.forName(stringType, classLoader);
         log.info(">> string: " + stringOptional);
+
+        Optional<Class> uuidConverted = env.convert(uuidType, ConversionContext.of(Argument.of(Class.class)));
+        log.info(">> uuidConverted: " + uuidConverted);
+        Optional<Class> stringConverted = env.convert(stringType, ConversionContext.of(Argument.of(Class.class)));
+        log.info(">> stringConverted: " + stringConverted);
     }
 
     private void populateUsers() {

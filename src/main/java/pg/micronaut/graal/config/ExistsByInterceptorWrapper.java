@@ -3,7 +3,6 @@ package pg.micronaut.graal.config;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micronaut.aop.MethodInvocationContext;
 import io.micronaut.context.annotation.Replaces;
-import io.micronaut.context.env.Environment;
 import io.micronaut.core.annotation.AnnotationValue;
 import io.micronaut.core.convert.ArgumentConversionContext;
 import io.micronaut.core.convert.ConversionContext;
@@ -14,10 +13,8 @@ import io.micronaut.data.intercept.RepositoryMethodKey;
 import io.micronaut.data.intercept.annotation.DataMethod;
 import io.micronaut.data.operations.RepositoryOperations;
 import io.micronaut.data.runtime.intercept.DefaultExistsByInterceptor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.inject.Inject;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Optional;
@@ -32,6 +29,7 @@ public class ExistsByInterceptorWrapper<T> extends DefaultExistsByInterceptor<T>
 
     @Override
     public Boolean intercept(RepositoryMethodKey methodKey, MethodInvocationContext<T, Boolean> context) {
+        /*
         log.info(">> context: " + context.getExecutableMethod().getClass().getName() + " : " + context.toString());
 
         AnnotationValue<Annotation> annotation = context.getAnnotationMetadata().getAnnotation("io.micronaut.data.intercept.annotation.DataMethod");
@@ -64,12 +62,12 @@ public class ExistsByInterceptorWrapper<T> extends DefaultExistsByInterceptor<T>
 
         log.info(">> idType string: " + annotation.stringValue(DataMethod.META_MEMBER_ID_TYPE));
         log.info(">> idType class: " + annotation.classValue(DataMethod.META_MEMBER_ID_TYPE));
+*/
+        Optional<Class> idType = context.classValue(DataMethod.class, DataMethod.META_MEMBER_ID_TYPE);
+        log.info(">> context idType: " + idType.map(Class::getName).orElse(null));
 
-        Optional<Class> aClass = context.classValue(DataMethod.class, DataMethod.META_MEMBER_ID_TYPE);
-        log.info(">> aClass: " + aClass.map(Class::getName).orElse(null));
-
-        Class idType = aClass.orElseGet(() -> getRequiredRootEntity(context));
-        log.info(">> idType: " + idType.getName());
+        Class rootEntityType = idType.orElseGet(() -> getRequiredRootEntity(context));
+        log.info(">> context rootEntity: " + rootEntityType.getName());
 
         return super.intercept(methodKey, context);
     }
