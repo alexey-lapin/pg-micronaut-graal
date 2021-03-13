@@ -8,6 +8,7 @@ import io.micronaut.core.reflect.ReflectionUtils;
 import io.micronaut.inject.BeanDefinition;
 import io.micronaut.inject.ExecutableMethod;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import pg.micronaut.graal.domain.model.User;
 
 import javax.inject.Singleton;
@@ -25,6 +26,7 @@ import java.util.UUID;
 @Introspected
 @RequiredArgsConstructor
 @Singleton
+@Slf4j
 public class JpaUserRepositoryAdapter implements UserRepository {
 
     private final DataUserRepository repository;
@@ -43,10 +45,10 @@ public class JpaUserRepositoryAdapter implements UserRepository {
     @Override
     public User save(User user) {
         UUID id = user.getId();
-        System.out.println(">> " + id.getClass().getName());
+        log.info(">> user.id: " + id.getClass().getName());
         BeanDefinition<? extends DataUserRepository> beanDefinition = context.getBeanDefinition(repository.getClass());
         Optional<? extends ExecutableMethod<? extends DataUserRepository, Object>> existsById = beanDefinition.findMethod("existsById", UUID.class);
-        System.out.println(">> " + existsById.get());
+        log.info(">> existsById method: " + existsById.get());
         boolean b = repository.existsById(id);
         if (b) {
             return repository.update(user);
