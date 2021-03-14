@@ -2,7 +2,7 @@ import io.micronaut.gradle.graalvm.NativeImageTask
 
 plugins {
     id("com.github.johnrengelman.shadow") version "6.1.0"
-    id("io.micronaut.application") version "1.3.4"
+    id("io.micronaut.application") version "1.4.2"
 }
 
 repositories {
@@ -21,9 +21,6 @@ micronaut {
 dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.18")
     compileOnly("org.projectlombok:lombok:1.18.18")
-
-    annotationProcessor("io.micronaut:micronaut-inject-java")
-    annotationProcessor("io.micronaut.data:micronaut-data-processor")
 
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
