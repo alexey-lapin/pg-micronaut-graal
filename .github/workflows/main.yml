@@ -98,6 +98,8 @@ jobs:
           dir "c:\program files (x86)\microsoft visual studio"
 #          dir "c:\program files (x86)\microsoft visual studio\2017"
 #          dir "c:\program files (x86)\microsoft visual studio\2017\Community"
+#          dir "C:\Program Files (x86)\Microsoft Visual Studio\"
+          dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
 
       - name: Choco help
         uses: crazy-max/ghaction-chocolatey@v1
