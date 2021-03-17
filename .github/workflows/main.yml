@@ -94,9 +94,10 @@ jobs:
       - name: fd
         run: |
           dir "c:\ProgramData"
+          dir "c:\ProgramData\Microsoft Visual Studio"
           dir "c:\program files (x86)\microsoft visual studio"
-          dir "c:\program files (x86)\microsoft visual studio\2017"
-          dir "c:\program files (x86)\microsoft visual studio\2017\Community"
+#          dir "c:\program files (x86)\microsoft visual studio\2017"
+#          dir "c:\program files (x86)\microsoft visual studio\2017\Community"
 
       - name: Choco help
         uses: crazy-max/ghaction-chocolatey@v1
