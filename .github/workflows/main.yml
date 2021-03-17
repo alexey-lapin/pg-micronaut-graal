@@ -83,10 +83,10 @@ jobs:
         with:
           args: install zip unzip fd
 
-#      - name: Choco help
-#        uses: crazy-max/ghaction-chocolatey@v1
-#        with:
-#          args: install visualstudio2017buildtools
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install visualstudio2017buildtools
 
 #      - name: Choco help
 #        uses: crazy-max/ghaction-chocolatey@v1
