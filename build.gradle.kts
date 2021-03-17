@@ -1,4 +1,5 @@
 import io.micronaut.gradle.graalvm.NativeImageTask
+import org.gradle.internal.os.OperatingSystem.*
 
 plugins {
     id("com.github.johnrengelman.shadow") version "6.1.0"
@@ -47,6 +48,9 @@ java {
 tasks {
     withType<NativeImageTask> {
         verbose(true)
+        if (current().isWindows) {
+            executable("native-image.cmd")
+        }
     }
 }
 
