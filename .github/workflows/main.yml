@@ -83,16 +83,21 @@ jobs:
         with:
           args: install zip unzip fd
 
-#      - name: Choco help
-#        uses: crazy-max/ghaction-chocolatey@v1
-#        with:
-#          args: visualstudio2017-workload-vctools --version 1.3.2
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install visualstudio2017buildtools
+
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install visualstudio2017-workload-vctools
 
       - name: fd
         run: fd --version
 
-      - name: fd
-        run: fd "Microsoft Visual Studio" C:\
+#      - name: fd
+#        run: fd "Microsoft Visual Studio" C:\
 
 #      - name: Cache Gradle wrapper and dependencies
 #        uses: actions/cache@v2
