@@ -70,10 +70,18 @@ jobs:
         run: |
           gu.cmd install native-image
 
+#      - name: Cache Chocolatey Dependencies
+#        uses: actions/cache@v1
+#        with:
+#          path: C:\ProgramData\chocolatey\lib
+#          key: choco-cache-${{ hashFiles('**/dependencies.config') }}
+#          restore-keys: |
+#            choco-cache-
+
       - name: Choco help
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: install visualstudio2017-workload-vctools fd
+          args: upgrade -y visualstudio2017-workload-vctools fd
 
       - name: fd
         run: fd --version
