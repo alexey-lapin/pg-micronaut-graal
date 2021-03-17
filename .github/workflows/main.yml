@@ -86,7 +86,7 @@ jobs:
       - name: Choco help
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: install visualstudio2017buildtools
+          args: install visualstudio2017buildtools --verbose --debug
 
 #      - name: fd
 #        run: fd --version
@@ -102,7 +102,7 @@ jobs:
       - name: Choco help
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: install visualstudio2017-workload-vctools --verbose
+          args: install visualstudio2017-workload-vctools --verbose --debug
 
 #      - name: fd
 #        run: fd "Microsoft Visual Studio" C:\
