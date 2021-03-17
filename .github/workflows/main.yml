@@ -88,19 +88,20 @@ jobs:
         with:
           args: install visualstudio2017buildtools
 
-#      - name: Choco help
-#        uses: crazy-max/ghaction-chocolatey@v1
-#        with:
-#          args: install visualstudio2017-workload-vctools
-
-      - name: fd
-        run: fd --version
+#      - name: fd
+#        run: fd --version
 
       - name: fd
         run: |
+          dir "c:\ProgramData"
           dir "c:\program files (x86)\microsoft visual studio"
           dir "c:\program files (x86)\microsoft visual studio\2017"
           dir "c:\program files (x86)\microsoft visual studio\2017\Community"
+
+      - name: Choco help
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install visualstudio2017-workload-vctools --verbose
 
 #      - name: fd
 #        run: fd "Microsoft Visual Studio" C:\
